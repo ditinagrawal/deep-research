@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google';
+import { openai } from '@ai-sdk/openai';
 import { generateObject, generateText, tool } from 'ai';
 import dotenv from 'dotenv';
 import Exa from "exa-js";
@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 dotenv.config();
 
-const model = google('gemini-2.0-flash');
+const model = openai('gpt-4o');
 const exa = new Exa(process.env.EXASEARCH_API_KEY);
 
 type SearchResult = {
