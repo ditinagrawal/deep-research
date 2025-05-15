@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Deep Research Tool</h1>
+      <p>AI-powered web research that explores topics in depth</p>
+    </header>
+    
+    <main>
+      <div class="card">
+        <h2>Start Your Research</h2>
+        <form action="/research" method="POST">
+          <div class="form-group">
+            <label for="query">Research Query</label>
+            <textarea id="query" name="query" rows="3" required placeholder="What do you want to research? e.g., 'What do you need to be a fullstack developer using JavaScript?'"></textarea>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="depth">Research Depth</label>
+              <select id="depth" name="depth">
+                <option value="1">Shallow (1 level)</option>
+                <option value="2" selected>Normal (2 levels)</option>
+                <option value="3">Deep (3 levels)</option>
+              </select>
+              <small>How many levels of follow-up questions to explore</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="breadth">Research Breadth</label>
+              <select id="breadth" name="breadth">
+                <option value="1">Narrow (1 query)</option>
+                <option value="2" selected>Normal (2 queries)</option>
+                <option value="3">Wide (3 queries)</option>
+                <option value="5">Very Wide (5 queries)</option>
+              </select>
+              <small>How many search queries to generate at each level</small>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Start Research</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    
+    <footer>
+      <p>Deep Research Tool - Powered by OpenAI and Exa Search API</p>
+    </footer>
+  </div>
+</body>
+</html> 

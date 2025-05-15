@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Deep Research Results</h1>
+      <a href="/" class="btn secondary">New Research</a>
+    </header>
+    
+    <main>
+      <% if (locals.loading) { %>
+        <div class="loading">
+          <h2>Researching...</h2>
+          <div class="spinner"></div>
+          <p>This may take a few minutes depending on research depth and breadth</p>
+        </div>
+      <% } else if (locals.error) { %>
+        <div class="error-card">
+          <h2>Error</h2>
+          <p><%= error %></p>
+          <a href="/" class="btn primary">Try Again</a>
+        </div>
+      <% } else if (locals.research && locals.report) { %>
+        <div class="report-section">
+          <h2>Research Report</h2>
+          <div class="report-content">
+            <%- report.replace(/\n/g, '<br>') %>
+          </div>
+        </div>
+        
+        <div class="details-section">
+          <h2>Research Details</h2>
+          
+          <div class="card">
+            <h3>Original Query</h3>
+            <p><%= research.query %></p>
+          </div>
+          
+          <div class="card">
+            <h3>Search Queries Generated</h3>
+            <ul>
+              <% research.queries.forEach(query => { %>
+                <li><%= query %></li>
+              <% }) %>
+            </ul>
+          </div>
+          
+          <div class="card">
+            <h3>Learnings</h3>
+            <div class="learnings-list">
+              <% research.learnings.forEach((learning, index) => { %>
+                <div class="learning-item">
+                  <h4>Learning <%= index + 1 %></h4>
+                  <p><%= learning.learning %></p>
+                  
+                  <h5>Follow-up Questions:</h5>
+                  <ul>
+                    <% learning.followUpQuestion.forEach(question => { %>
+                      <li><%= question %></li>
+                    <% }) %>
+                  </ul>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h3>Sources</h3>
+            <div class="sources-list">
+              <% research.searchResults.forEach(result => { %>
+                <div class="source-item">
+                  <h4><a href="<%= result.url %>" target="_blank"><%= result.title %></a></h4>
+                  <p class="source-url"><%= result.url %></p>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="no-results">
+          <h2>No Research Results</h2>
+          <p>Start a new research query to see results here.</p>
+          <a href="/" class="btn primary">Start Research</a>
+        </div>
+      <% } %>
+    </main>
+    
+    <footer>
+      <p>Deep Research Tool - Powered by OpenAI and Exa Search API</p>
+    </footer>
+  </div>
+</body>
+</html> 
